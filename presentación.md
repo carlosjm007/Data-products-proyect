@@ -39,4 +39,4 @@ Remember<br />
 
 Getting probability
 ========================================================
-Please, click on this link
+Please, click on this <a href="https://carlosjm5.shinyapps.io/Example/">link</a> to go to the app and click <a href="https://github.com/carlosjm007/Data-products-proyect">here</a> to go to the de code on github
