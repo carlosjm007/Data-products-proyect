@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "Getting probability\n========================================================\nauthor: Carlos José Manosalva\ndate: November 3/2017\nautosize: true\n\nGetting probability\n========================================================\n\nThis tool allows you find the probability to getting a range of number between -75 to 75, you just have to move the slider to set the mean, standard deviation and the range Z and X.\n\nGetting probability\n========================================================\nGiven to normal distribution of 300 records, you can know the probability, according to the Z and X, besides, you can see the graphic representation of:<br />\nHistogram<br />\nGauss bell<br />\nReal time ubication of Z and X<br />\n```{r}\nlibrary(ggplot2)\nr <- rnorm(300, m=5, 6)\nx <- seq(-75,75,length=300)\ny <- dnorm(x,mean=5,sd=6)\ndata = data.frame(r,y,x)\n```\n\nGetting probability\n========================================================\nleft: 40%\nRemember<br />\n  - Z: Blue vertical line.<br />\n  - X: Red vertical line.<br />\n  - Gauss bell: Red curve.<br />\n  - Histogram: grey bars.<br />\n  \n***\n\n```{r, echo=FALSE}\nggplot(data=data, aes(x=r)) + \ngeom_histogram(colour=\"#7b7b7b\") +\nxlim(c(-75,75)) +\nscale_y_continuous(sec.axis = sec_axis(~./600, name = \"Gauss distribution\")) +\ngeom_line(data = data, mapping = aes(x = x, y = y*600, color=\"dnomr\"),size=2) +\ngeom_vline(aes(xintercept=-3, color=\"Z\"),size=1) +\ngeom_vline(aes(xintercept=5, colour=\"X\"),size=1) +\nscale_color_manual(name = \"Lines\",\n                   values = c(Z = \"#3e73e3\", X = \"#55bc66\", dnomr=\"#99003e\"),\n                   labels = c(Z = \"Z\", X = \"X\", dnomr=\"Gauss bell\"))\n```\n\nGetting probability\n========================================================\nPlease, click on this link\n",
+    "created" : 1512253226270.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "118678240",
+    "id" : "50E13904",
+    "lastKnownWriteTime" : 1512328841,
+    "last_content_update" : 1512328841458,
+    "path" : "~/Example/presentación.Rpres",
+    "project_path" : "presentación.Rpres",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_presentation"
+}

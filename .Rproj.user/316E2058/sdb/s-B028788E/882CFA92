@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\n# This is the server logic for a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\nlibrary(ggplot2)\nshinyServer(function(input, output) {\n  output$distPlot <- renderPlot({\n    r <- rnorm(300, m=input$mean, sd=input$sd)\n    x <- seq(-75,75,length=300)\n    y <- dnorm(x,mean=input$mean,sd=input$sd)\n    data = data.frame(r,y,x)\n    ggplot(data=data, aes(x=r)) + \n      geom_histogram(colour=\"#7b7b7b\") +\n      xlim(c(-75,75)) +\n      scale_y_continuous(sec.axis = sec_axis(~./600, name = \"Gauss distribution\")) +\n      geom_line(data = data, mapping = aes(x = x, y = y*600, color=\"dnomr\"),size=2) +\n      geom_vline(aes(xintercept=input$menos, color=\"Z\"),size=1) +\n      geom_vline(aes(xintercept=input$mas, colour=\"X\"),size=1) +\n      scale_color_manual(name = \"Lines\",\n                         values = c(Z = \"#3e73e3\", X = \"#55bc66\", dnomr=\"#99003e\"),\n                         labels = c(Z = \"Z\", X = \"X\", dnomr=\"Gauss bell\"))\n  })\n  output$zless <- renderText({\n    zless <- pnorm(input$menos, mean=input$mean, sd=input$sd)*100\n    paste(\"The probability to get Z lesser than \", input$menos, \" is \" , round(zless,1), \"%\")\n  })\n  output$xless <- renderText({\n    xless <- pnorm(input$mas, mean=input$mean, sd=input$sd)*100\n    paste(\"The probability to get X lesser than \", input$mas, \" is \" , round(xless,1), \"%\")\n  })\n  output$zmore <- renderText({\n    zmore <- pnorm(input$menos, mean=input$mean, sd=input$sd, lower.tail=FALSE)*100\n    paste(\"The probability to get Z greater than \", input$menos, \" is \" , round(zmore,1), \"%\")\n  })\n  output$xmore <- renderText({\n    xmore <- pnorm(input$mas, mean=input$mean, sd=input$sd, lower.tail=FALSE)*100\n    paste(\"The probability to get X greater than \", input$mas, \" is \" , round(xmore,1), \"%\")\n  })\n  output$ztox <- renderText({\n    zmore <- pnorm(input$menos, mean=input$mean, sd=input$sd, lower.tail=FALSE)*100\n    xmore <- pnorm(input$mas, mean=input$mean, sd=input$sd, lower.tail=FALSE)*100\n    paste(\"The probability to get z greater than \", input$menos, \" but with x lesser than \", input$mas, \" is \" , round(zmore - xmore,1), \"%\")\n  })\n})",
+    "created" : 1512176144948.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2538209202",
+    "id" : "882CFA92",
+    "lastKnownWriteTime" : 1512321987,
+    "last_content_update" : 1512321987786,
+    "path" : "~/Example/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
